@@ -699,7 +699,7 @@ def onehot_categorizer(df: pd.DataFrame,
 
         make_dummies = lambda col: dict(map(lambda categ: ("fklearn_feat__" + col + "==" + str(categ),
                                                            (new_df[col] == categ).astype(int)),
-                                            vec[col]))
+                                            vec[col][int(drop_first_column):]))
 
         oh_cols = dict(mapcat(lambda col: merge(make_dummies(col),
                                                 {"fklearn_feat__" + col + "==" + "nan":
